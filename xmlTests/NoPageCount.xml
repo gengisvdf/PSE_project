@@ -1,0 +1,12 @@
+<SYSTEM>
+    <DEVICE>
+        <name>Printer_gumbr</name>
+        <emission>3</emission>
+        <speed>90</speed>
+    </DEVICE>
+    <JOB>
+        <jobNumber>12354</jobNumber>
+        <pageCount></pageCount>
+        <userName>AdamBoustta</userName>
+    <JOB>
+</SYSTEM>

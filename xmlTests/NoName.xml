@@ -1,0 +1,22 @@
+<SYSTEM>
+    <DEVICE>
+        <name></name>
+        <emission>3</emission>
+        <speed>80</speed>
+    </DEVICE>
+    <DEVICE>
+        <name>azcaevezv</name>
+        <emission>3</emission>
+        <speed>84</speed>
+    </DEVICE>
+    <JOB>
+        <jobNumber>4525</jobNumber>
+        <pageCount>10</pageCount>
+        <userName>NoahMasudi</userName>
+    </JOB>
+    <JOB>
+        <jobNumber>565</jobNumber>
+        <pageCount>2</pageCount>
+        <userName>khabib</userName>
+    </JOB>
+</SYSTEM>
