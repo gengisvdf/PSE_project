@@ -3,9 +3,12 @@
 
 #include <iostream>
 #include "tinyxml.h"
+
 using namespace std;
 
 class Device;
+
+
 
 
 class Job {

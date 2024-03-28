@@ -4,6 +4,12 @@
 #include "DesignByContract.h"
 #include <iostream>
 #include <sstream>
+#include <fstream>
+static const std::string errorExtension = ".error";
+static const std::string errorDirectory = "errors/";
+static const std::string erroFileName = "error_";
+static string errFile = constructFilename(errorDirectory, errorExtension,erroFileName);
+
 
 
 
@@ -22,16 +28,16 @@ bool Job::isFinished() const {
     return finished;
 }
 
-void Job::setFinished(bool finished) {
-    Job::finished = finished;
+void Job::setFinished(bool Finished) {
+    Job::finished = Finished;
 }
 
 bool Job::isInProcess() const {
     return inProcess;
 }
 
-void Job::setInProcess(bool inProcess) {
-    Job::inProcess = inProcess;
+void Job::setInProcess(bool InProcess) {
+    Job::inProcess = InProcess;
 }
 
 const std::string &Job::getUserName() const {
@@ -43,8 +49,8 @@ Device *Job::getBeingWorkedOnBy() const {
     return beingWorkedOnBy;
 }
 
-void Job::setBeingWorkedOnBy(Device *beingWorkedOnBy) {
-    Job::beingWorkedOnBy = beingWorkedOnBy;
+void Job::setBeingWorkedOnBy(Device *BeingWorkedOnBy) {
+    Job::beingWorkedOnBy = BeingWorkedOnBy;
 }
 
 Job::Job(int jobNumber, int pageCount, const std::string &userName) : jobNumber(jobNumber), pageCount(pageCount), userName(userName) {}
@@ -54,6 +60,8 @@ Job::Job(TiXmlElement *job_element) {
     std::string JN_temp;
     std::string PC_temp;
     std::string UN_temp;
+    std::ofstream errorfile(errFile, std::ofstream::app);
+
 
     TiXmlNode *node = job_element->FirstChild();
     while (node != NULL) {
@@ -78,8 +86,7 @@ Job::Job(TiXmlElement *job_element) {
         }
         node = node->NextSibling();
     }
-
-    EXPECT(!JN_temp.empty(), "Geen jobNumber opgegeven.");
+try{    EXPECT(!JN_temp.empty(), "Geen jobNumber opgegeven.");
     EXPECT(isInt(JN_temp), "JobNumber moet een integer zijn.");
     EXPECT(!isNegativeInt(JN_temp), "JobNumber mag niet negatief zijn.");
     jobNumber = std::stoi(JN_temp);
@@ -92,7 +99,13 @@ Job::Job(TiXmlElement *job_element) {
 
 
     EXPECT(!UN_temp.empty(), "Geen userName opgegeven.");
-    userName = UN_temp;
+    userName = UN_temp;}catch (const std::runtime_error& error){
+    if(errorfile.is_open()){
+        errorfile <<  error.what() << std::endl;
+    }else{
+        cerr << "Error file kan niet geopend worden." << std::endl;
+        }
+    }
 }
 
 std::string Job::EndMessage() const{

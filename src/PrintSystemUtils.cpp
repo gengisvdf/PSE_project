@@ -16,6 +16,8 @@
 #include <sstream>
 
 
+
+
 /**
 Auxiliary functions for file manipulation.
 */
@@ -124,6 +126,7 @@ bool isNotInDevice(Job *job, std::deque<Job *>& jobs){
     }
     return true;
 }
+
 
 bool isNegative(int value) {
     return value < 0;

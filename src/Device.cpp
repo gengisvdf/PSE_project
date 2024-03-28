@@ -3,8 +3,9 @@
 #include "DesignByContract.h"
 #include <sstream>
 #include <thread>
-
+#include <fstream>
 #include <random>
+#include "PrintSystem.h"
 
 
 
@@ -16,6 +17,7 @@ Device::Device(TiXmlElement *device_node) {
     string NA_temp;
     string EM_temp;
     string SP_temp;
+    std::ofstream errorfile(errFile, std::ofstream::app);
 
     TiXmlNode *node = device_node->FirstChild();
     while (node != nullptr) {
@@ -42,22 +44,33 @@ Device::Device(TiXmlElement *device_node) {
         node = node->NextSibling();
     }
 
-    EXPECT(!NA_temp.empty(), "Geen name opgegeven.");
-    name = NA_temp;
 
-    EXPECT(!EM_temp.empty(), "Geen emission opgegeven.");
-    EXPECT(isInt(EM_temp) , "Emission moet een integer zijn.");
-    EXPECT(!isNegativeInt(EM_temp), "Emission mag niet negatief zijn");
-    emission = stoi(EM_temp);
+    try{EXPECT(!NA_temp.empty(), "Geen name opgegeven.");
+        name = NA_temp;
+
+        EXPECT(!EM_temp.empty(), "Geen emission opgegeven.");
+        EXPECT(isInt(EM_temp) , "Emission moet een integer zijn.");
+        EXPECT(!isNegativeInt(EM_temp), "Emission mag niet negatief zijn");
+        emission = stoi(EM_temp);
 
 
-    EXPECT(!SP_temp.empty(), "Geen speed opgegeven.");
-    EXPECT(isInt(SP_temp) , "Speed moet een integer zijn.");
-    EXPECT(!isNegativeInt(SP_temp), "Speed mag niet negatief zijn");
-    speed = stoi(SP_temp);
+        EXPECT(!SP_temp.empty(), "Geen speed opgegeven.");
+        EXPECT(isInt(SP_temp) , "Speed moet een integer zijn.");
+        EXPECT(!isNegativeInt(SP_temp), "Speed mag niet negatief zijn");
+        speed = stoi(SP_temp);}
+
+    catch(const std::runtime_error& error){
+        if(errorfile.is_open()){
+            errorfile <<  error.what() << std::endl;
+        }else{
+            std::cerr << "Error file kan niet geopend worden." << std::endl;
+        }
+    }
 }
 
-Device::~Device() {}
+
+
+Device::~Device() =default;
 
 //getters and setters
 const string &Device::getName() const {

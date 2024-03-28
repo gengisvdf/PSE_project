@@ -5,16 +5,25 @@
 #include <string>
 #include <algorithm>
 #include "tinyxml.h"
+#include "PrintSystemUtils.h"
 using namespace std;
 
 static const std::string reportExtension = ".txt";
 static const std::string reportDirectory = "reports/";
 static const std::string reportFileName = "report_";
 
-
 static const std::string processExtension = ".txt";
 static const std::string processDirectory = "procesCases/";
 static const std::string processFileName = "case_";
+
+static const std::string errorExtension = ".error";
+static const std::string errorDirectory = "errors/";
+static const std::string erroFileName = "error_";
+static string errFile = constructFilename(errorDirectory, errorExtension,erroFileName);
+
+
+
+
 
 
 class Device;
