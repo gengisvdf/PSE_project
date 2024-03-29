@@ -9,10 +9,13 @@
 #ifndef PSE_PROJECT_PRINTSYSTEMUTILS_H
 #define PSE_PROJECT_PRINTSYSTEMUTILS_H
 
-
+#include <deque>
 #include <iostream>
 #include <cctype>
 #include "Device.h"
+#include "Output.h"
+class Device;
+class Job;
 
 /**
  * \brief Controleert of een directory bestaat
@@ -56,13 +59,13 @@ bool is_number(const std::string& s);
  * @param extension De bestandsextensie
  * @return De gegenereerde bestandsnaam
  */
-std::string constructFilename(const std::string& storageDirectory, const std::string& reportExtension, const std::string& name);
+std::string constructFilename();
 
 bool isInt(const std::string& str);
 bool isNegativeInt(const std::string& str);
 
 
-bool isNotInDevice(Job *job, std::deque<Job*>& jobs);
+bool isNotInDevice(Job *job, const std::deque<Job*>& jobs);
 
 bool isNegative(int value);
 

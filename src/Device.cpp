@@ -1,12 +1,8 @@
 #include "Device.h"
+#include <thread>
+
 #include "PrintSystemUtils.h"
 #include "DesignByContract.h"
-#include <sstream>
-#include <thread>
-#include <fstream>
-#include <random>
-#include "PrintSystem.h"
-
 
 
 
@@ -88,8 +84,6 @@ int Device::getEmission() const {
 int Device::getSpeed() const {
     return speed;
 }
-
-
 
 
 void Device::addJob(Job *job) {

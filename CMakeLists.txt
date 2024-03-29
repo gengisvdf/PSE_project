@@ -41,7 +41,8 @@ set(DEBUG_SOURCE_FILES
         src/Device.cpp
         src/Job.cpp
         src/PrintSystem.cpp
-        src/TEST.cpp)
+        src/TEST.cpp
+        src/Output.cpp)
 
 
 # Create RELEASE target

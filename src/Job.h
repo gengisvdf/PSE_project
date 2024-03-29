@@ -3,8 +3,14 @@
 
 #include <iostream>
 #include "tinyxml.h"
+#include "PrintSystemUtils.h"
+#include "DesignByContract.h"
+#include <sstream>
+#include <fstream>
 
 using namespace std;
+
+static const std::string errFile = constructFilename();
 
 class Device;
 

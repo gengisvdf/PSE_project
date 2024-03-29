@@ -1,9 +1,5 @@
 #include "PrintSystem.h"
-#include <iostream>
-#include <fstream>
-#include <chrono>
-#include "DesignByContract.h"
-#include "Device.h"
+
 
 
 using namespace std;

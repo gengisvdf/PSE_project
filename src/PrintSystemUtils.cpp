@@ -8,12 +8,10 @@
 
 #include <fstream>
 #include <sys/stat.h>
-
-
 #include "PrintSystemUtils.h"
 #include <ctime>
 #include <iomanip>
-#include <sstream>
+
 
 
 
@@ -116,7 +114,7 @@ bool isNegativeInt(const std::string& str) {
 }
 
 
-bool isNotInDevice(Job *job, std::deque<Job *>& jobs){
+bool isNotInDevice(Job *job,const std::deque<Job *>& jobs){
     int job1n = job->getJobNumber();
     for(Job* j: jobs){
         int job2n = j->getJobNumber();
@@ -132,7 +130,9 @@ bool isNegative(int value) {
     return value < 0;
 }
 
-std::string constructFilename(const std::string& storageDirectory, const std::string& reportExtension, const std::string& name){
+std::string constructFilename(){
+    Output output;
+    output.askOutput();
     std::time_t now = std::time(nullptr);
     std::tm* localTime = std::localtime(&now);
 
@@ -140,7 +140,7 @@ std::string constructFilename(const std::string& storageDirectory, const std::st
     oss << std::put_time(localTime, "%Y%m%d_%H%M%S");
     std::string datetimeStr = oss.str();
 
-    std::string filename = storageDirectory + name + datetimeStr + reportExtension;
+    std::string filename = output.directory + output.fileName + datetimeStr + output.extension;
     return filename;
 
 }

@@ -1,12 +1,12 @@
 #ifndef PSE_PROJECT_DEVICE_H
 #define PSE_PROJECT_DEVICE_H
 
-#include <iostream>
 #include <vector>
 #include "Job.h"
 #include <deque>
 using namespace std;
 // Een klasse die een apparaat voorstelt in het printsysteem
+class Job;
 
 class Device {
 private:
