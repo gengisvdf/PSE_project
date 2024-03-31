@@ -4,6 +4,7 @@
 
 #include "Logger.h"
 
+
 Logger::Logger(const std::string& filename) {
     writeFile.open(filename, std::ofstream::app);
     if (!writeFile.is_open()) {
@@ -20,6 +21,19 @@ void Logger::logError(const std::string& errorMessage) {
     }
 }
 
+std::string Logger::logEndMessage(const std::string& deviceName, int jobNumber, const std::string& userName, int pageCount)  {
+
+    std::stringstream endMessage;
+
+    endMessage << "Printer \"" << deviceName << "\" finished job:" << std::endl;
+    endMessage << "\tNumber: " << jobNumber << std::endl;
+    endMessage << "\tSubmitted by \"" << userName << "\"" << std::endl;
+    endMessage << "\t" << pageCount << " pages" << std::endl;
+
+    logError(endMessage.str());
+
+    return endMessage.str();
+}
 
 Logger::~Logger() = default;
 

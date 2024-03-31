@@ -50,9 +50,6 @@ set(DEBUG_SOURCE_FILES
 
 # Create RELEASE target
 add_executable(release_target ${RELEASE_SOURCE_FILES})
-if(CMAKE_BUILD_TYPE MATCHES "Release")
-    add_definitions(-DNDEBUG)
-endif()
 
 
 

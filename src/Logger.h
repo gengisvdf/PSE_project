@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 class Logger {
 private:
@@ -18,6 +19,7 @@ public:
 
     //methodes
     void logError(const std::string& errorMessage);
+    std::string logEndMessage(const std::string& deviceName, int jobNumber, const std::string& userName, int pageCount) ;
 };
 
 
