@@ -29,6 +29,7 @@ set(RELEASE_SOURCE_FILES         src/main.cpp
         src/Device.cpp
         src/Job.cpp
         src/PrintSystem.cpp
+        src/Logger.cpp
 )
 
 # Set source files for DEBUG target
