@@ -8,6 +8,8 @@ CO2-friendly printing system
 ### Moduls
 - Output
 - Read
-- Control 
+- Control
+### Gtests
+-using the errorfiles
 
 
