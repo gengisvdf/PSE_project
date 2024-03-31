@@ -8,9 +8,9 @@
 #include <sstream>
 #include <fstream>
 
+
 using namespace std;
 
-static const std::string errFile = constructFilename();
 
 class Device;
 

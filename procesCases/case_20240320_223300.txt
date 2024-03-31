@@ -1,5 +1,0 @@
-Printer "azcaevezv" finished job:
-	Number: 4525
-	Submitted by "NoahMasudi"
-	10 pages
-

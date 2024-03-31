@@ -130,9 +130,7 @@ bool isNegative(int value) {
     return value < 0;
 }
 
-std::string constructFilename(){
-    Output output;
-    output.askOutput();
+std::string constructFilename(const std::string& storageDirectory, const std::string& reportExtension, const std::string& name){
     std::time_t now = std::time(nullptr);
     std::tm* localTime = std::localtime(&now);
 
@@ -140,7 +138,7 @@ std::string constructFilename(){
     oss << std::put_time(localTime, "%Y%m%d_%H%M%S");
     std::string datetimeStr = oss.str();
 
-    std::string filename = output.directory + output.fileName + datetimeStr + output.extension;
+    std::string filename = storageDirectory + name + datetimeStr + reportExtension;
     return filename;
 
 }

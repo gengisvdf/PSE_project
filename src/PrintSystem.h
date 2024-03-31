@@ -9,7 +9,14 @@
 
 
 using namespace std;
+static const std::string reportExtension = ".txt";
+static const std::string reportDirectory = "reports/";
+static const std::string reportFileName = "report_";
 
+
+static const std::string processExtension = ".txt";
+static const std::string processDirectory = "procesCases/";
+static const std::string processFileName = "case_";
 
 
 class PrintSystem{

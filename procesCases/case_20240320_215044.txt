@@ -1,5 +1,0 @@
-Printer "Office_Printer" finished job:
-	Number: -596042864
-	Submitted by "Klawi"
-	10 pages
-

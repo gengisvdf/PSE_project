@@ -1,5 +1,0 @@
-Printer "Office_Printer" finished job:
-	Number: 12354
-	Submitted by "Directeur"
-	2 pages
-

@@ -1,5 +1,11 @@
 
 #include "Job.h"
+#include "Logger.h"
+
+static const std::string errorExtension = ".error";
+static const std::string errorDirectory = "errors/";
+static const std::string erroFileName = "error_";
+static string errFile = constructFilename(errorDirectory, errorExtension,erroFileName);
 
 
 
@@ -52,6 +58,7 @@ Job::Job(TiXmlElement *job_element) {
     std::string PC_temp;
     std::string UN_temp;
     std::ofstream errorfile(errFile, std::ofstream::app);
+    Logger errorLog(errFile);
 
 
     TiXmlNode *node = job_element->FirstChild();
@@ -72,7 +79,7 @@ Job::Job(TiXmlElement *job_element) {
             } else if (nodeName == "userName") {
                 UN_temp = nodeValue;
             } else {
-                EXPECT(false, "Onbekend attribuut voor Taak: '" + nodeName + "'");
+                errorLog.logError("Onbekende element: " + nodeName);
             }
         }
         node = node->NextSibling();

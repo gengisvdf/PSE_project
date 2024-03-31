@@ -4,6 +4,10 @@
 #include "PrintSystemUtils.h"
 #include "DesignByContract.h"
 
+static const std::string errorExtension = ".error";
+static const std::string errorDirectory = "errors/";
+static const std::string erroFileName = "error_";
+static  string errFile = constructFilename(errorDirectory, errorExtension,erroFileName);
 
 
 

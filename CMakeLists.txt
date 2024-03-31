@@ -28,7 +28,8 @@ set(RELEASE_SOURCE_FILES         src/main.cpp
         src/PrintSystemUtils.cpp
         src/Device.cpp
         src/Job.cpp
-        src/PrintSystem.cpp)
+        src/PrintSystem.cpp
+)
 
 # Set source files for DEBUG target
 # Only add cpp files, no h files!
@@ -42,7 +43,8 @@ set(DEBUG_SOURCE_FILES
         src/Job.cpp
         src/PrintSystem.cpp
         src/TEST.cpp
-        src/Output.cpp)
+        src/Output.cpp
+        src/Logger.cpp)
 
 
 # Create RELEASE target
