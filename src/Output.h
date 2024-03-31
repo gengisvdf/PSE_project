@@ -20,7 +20,7 @@ struct Output {
     void setDirectory(const std::string &directory);
     void setFileName(const std::string &fileName);
 
-    void askOutput();
+
 
 
 };

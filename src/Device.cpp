@@ -1,5 +1,6 @@
 #include "Device.h"
 #include <thread>
+#include "Logger.h"
 
 #include "PrintSystemUtils.h"
 #include "DesignByContract.h"
@@ -17,7 +18,7 @@ Device::Device(TiXmlElement *device_node) {
     string NA_temp;
     string EM_temp;
     string SP_temp;
-    std::ofstream errorfile(errFile, std::ofstream::app);
+    Logger errorLog(errFile);
 
     TiXmlNode *node = device_node->FirstChild();
     while (node != nullptr) {
@@ -38,7 +39,7 @@ Device::Device(TiXmlElement *device_node) {
             SP_temp = nodeValue;
 
         } else {
-            EXPECT(false, "Onbekend attribuut voor Device: '" + nodeName + "'");
+            errorLog.logError("Onbekende element voor device: " + nodeName);
         }
 
         node = node->NextSibling();
@@ -60,11 +61,7 @@ Device::Device(TiXmlElement *device_node) {
         speed = stoi(SP_temp);}
 
     catch(const std::runtime_error& error){
-        if(errorfile.is_open()){
-            errorfile <<  error.what() << std::endl;
-        }else{
-            std::cerr << "Error file kan niet geopend worden." << std::endl;
-        }
+        errorLog.logError(error.what());
     }
 }
 
@@ -101,7 +98,9 @@ string Device::printReport() const {
         EXPECT(emission >= 0, "Emission is negatief.");
         EXPECT(speed >= 0, "Speed is negatief.");
     }catch(const std::runtime_error& error){
-        std::cerr << error.what();
+        Logger errorLog(errFile);
+        errorLog.logError(error.what());
+
     }
 
     stringstream report;

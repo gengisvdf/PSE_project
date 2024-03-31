@@ -18,15 +18,7 @@ void Output::setFileName(const std::string &FileName) {
     Output::fileName = FileName;
 }
 
-void Output::askOutput(){
-    std::cout << "Enter extension:";
-    std::cin >> extension;
-    std::cout << "Enter directory:";
-    std::cin >> directory;
-    std::cout << "Enter filename:";
-    std::cin >> fileName;
 
-}
 
 Output::Output() {}
 

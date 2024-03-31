@@ -57,7 +57,6 @@ Job::Job(TiXmlElement *job_element) {
     std::string JN_temp;
     std::string PC_temp;
     std::string UN_temp;
-    std::ofstream errorfile(errFile, std::ofstream::app);
     Logger errorLog(errFile);
 
 
@@ -79,12 +78,12 @@ Job::Job(TiXmlElement *job_element) {
             } else if (nodeName == "userName") {
                 UN_temp = nodeValue;
             } else {
-                errorLog.logError("Onbekende element: " + nodeName);
+                errorLog.logError("Onbekende element job: " + nodeName);
             }
         }
         node = node->NextSibling();
     }
-try{    EXPECT(!JN_temp.empty(), "Geen jobNumber opgegeven.");
+try{EXPECT(!JN_temp.empty(), "Geen jobNumber opgegeven.");
     EXPECT(isInt(JN_temp), "JobNumber moet een integer zijn.");
     EXPECT(!isNegativeInt(JN_temp), "JobNumber mag niet negatief zijn.");
     jobNumber = std::stoi(JN_temp);
@@ -97,12 +96,9 @@ try{    EXPECT(!JN_temp.empty(), "Geen jobNumber opgegeven.");
 
 
     EXPECT(!UN_temp.empty(), "Geen userName opgegeven.");
-    userName = UN_temp;}catch (const std::runtime_error& error){
-    if(errorfile.is_open()){
-        errorfile <<  error.what() << std::endl;
-    }else{
-        cerr << "Error file kan niet geopend worden." << std::endl;
-        }
+    userName = UN_temp;}
+catch (const std::runtime_error& error){
+    errorLog.logError(error.what());
     }
 }
 
