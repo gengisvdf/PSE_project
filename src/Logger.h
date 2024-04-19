@@ -12,9 +12,14 @@
 class Logger {
 private:
     std::ofstream writeFile;
+    std::stringstream endMessage;
+
 public:
     //constructors/destructors
     Logger(const std::string& filename);
+
+    Logger();
+
     virtual ~Logger();
 
     //methodes

@@ -104,17 +104,14 @@ catch (const std::runtime_error& error){
 
 std::string Job::EndMessage() const{
 
+    std::stringstream amessage;
+
     REQUIRE(getBeingWorkedOnBy() != NULL, "Job is not assigned to a device");
-
-    std::stringstream endmessage;
-
-    endmessage << "Printer " << '"' << getBeingWorkedOnBy()->getName() << '"' << " finished job:" << std::endl;
-    endmessage << "\tNumber: " << jobNumber << std::endl;
-    endmessage << "\tSubmitted by " << '"' << userName << '"' << std::endl;
-    endmessage << "\t" << pageCount << " pages" << std::endl;
-    cout << endmessage.str() << endl;
-    return endmessage.str();
+    Logger endMessage;
+    return endMessage.logEndMessage(getBeingWorkedOnBy()->getName(), jobNumber, userName, pageCount);
 }
+
+
 
 
 

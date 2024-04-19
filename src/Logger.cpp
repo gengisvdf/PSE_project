@@ -13,6 +13,7 @@ Logger::Logger(const std::string& filename) {
 }
 
 
+
 void Logger::logError(const std::string& errorMessage) {
     if (writeFile.is_open()) {
         writeFile << errorMessage << std::endl;
@@ -23,17 +24,15 @@ void Logger::logError(const std::string& errorMessage) {
 
 std::string Logger::logEndMessage(const std::string& deviceName, int jobNumber, const std::string& userName, int pageCount)  {
 
-    std::stringstream endMessage;
-
-    endMessage << "Printer \"" << deviceName << "\" finished job:" << std::endl;
+    endMessage << "Printer \"" << deviceName << '"' <<" finished job:" << std::endl;
     endMessage << "\tNumber: " << jobNumber << std::endl;
     endMessage << "\tSubmitted by \"" << userName << "\"" << std::endl;
     endMessage << "\t" << pageCount << " pages" << std::endl;
 
-    logError(endMessage.str());
-
     return endMessage.str();
 }
+
+Logger::Logger() = default;
 
 Logger::~Logger() = default;
 
