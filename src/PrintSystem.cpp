@@ -20,14 +20,12 @@ PrintSystem::~PrintSystem() {
 
 std::string PrintSystem::printReport() const {
     string filename = constructFilename(reportDirectory,reportExtension, reportFileName);
-    ofstream report;
-    report.open(filename);
-    for (size_t i = 0; i < devices.size(); ++i) {
-        report << devices[i]->printReport();
-        if (i != devices.size() - 1)
-            report << "\n";
-    }
-    report.close();
+
+
+    Logger log(filename);
+
+    log.logAllReports(devices);
+
     return filename;
 }
 

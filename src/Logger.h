@@ -8,15 +8,20 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "Job.h"
+#include <deque>
 
 class Logger {
-private:
+public:
     std::ofstream writeFile;
     std::stringstream endMessage;
+    std::stringstream report;
+
 
 public:
     //constructors/destructors
     Logger(const std::string& filename);
+
 
     Logger();
 
@@ -24,7 +29,10 @@ public:
 
     //methodes
     void logError(const std::string& errorMessage);
-    std::string logEndMessage(const std::string& deviceName, int jobNumber, const std::string& userName, int pageCount) ;
+    std::string logEndMessage(const std::string& deviceName, int jobNumber, const std::string& userName, int pageCount);
+    std::string logReport(const std::string& name, int emission, const std::deque<Job *> &jobs);
+    void logAllReports(std::vector<Device *> devices);
+
 };
 
 

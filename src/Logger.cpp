@@ -6,11 +6,13 @@
 
 
 Logger::Logger(const std::string& filename) {
-    writeFile.open(filename, std::ofstream::app);
+    writeFile.open(filename, std::ios_base::app);
     if (!writeFile.is_open()) {
-        throw std::runtime_error("Kan het foutenbestand niet openen.");
+        throw std::runtime_error("Kan het bestand niet openen.");
     }
 }
+
+
 
 
 
@@ -32,7 +34,48 @@ std::string Logger::logEndMessage(const std::string& deviceName, int jobNumber, 
     return endMessage.str();
 }
 
+std::string Logger::logReport(const std::string& name, int emission, const std::deque<Job *> &jobs) {
+
+    report << name << " (CO2: " << emission << "g/page):" << std::endl;
+
+    if (!jobs.empty()) {
+        report << "\t* Current:" << std::endl;
+        report << "\t\t[#" << jobs.front()->getJobNumber() << "|" << jobs.front()->getUserName() << "]" << std::endl;
+
+        if (jobs.size() > 1) {
+            report << "\t* Queue:" << std::endl;
+            for (std::vector<Job*>::size_type i = 1; i < jobs.size(); i++) {
+                Job* job = jobs[i];
+                report << "\t\t[#" << job->getJobNumber() << "|" << job->getUserName() << "]" << std::endl;
+            }
+        }
+    } else {
+        report << "\tNo jobs" << std::endl;
+    }
+    return report.str();
+}
+
+void Logger::logAllReports(std::vector<Device *> devices){
+
+
+
+
+
+    for (size_t i = 0; i < devices.size(); ++i) {
+        writeFile << devices[i]->printReport();
+        if (i != devices.size() - 1)
+            writeFile << "\n";
+    }
+
+
+}
+
+
+
 Logger::Logger() = default;
 
-Logger::~Logger() = default;
-
+Logger::~Logger() {
+    if (writeFile.is_open()) {
+        writeFile.close();
+    }
+}

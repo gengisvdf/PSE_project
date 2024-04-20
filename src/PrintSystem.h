@@ -6,6 +6,7 @@
 #include <algorithm>
 #include "tinyxml.h"
 #include "Device.h"
+#include "Logger.h"
 
 
 using namespace std;

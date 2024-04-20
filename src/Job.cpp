@@ -103,9 +103,6 @@ catch (const std::runtime_error& error){
 }
 
 std::string Job::EndMessage() const{
-
-    std::stringstream amessage;
-
     REQUIRE(getBeingWorkedOnBy() != NULL, "Job is not assigned to a device");
     Logger endMessage;
     return endMessage.logEndMessage(getBeingWorkedOnBy()->getName(), jobNumber, userName, pageCount);
