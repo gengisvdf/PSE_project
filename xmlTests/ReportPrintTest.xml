@@ -1,22 +1,26 @@
 <SYSTEM>
     <DEVICE>
-        <name>58852</name>
-        <emission>8</emission>
+        <name>Office_Printer5</name>
+        <emission>3</emission>
+        <type>bw</type>
         <speed>40</speed>
     </DEVICE>
+    <DEVICE>
+        <name>ColorPrinter</name>
+        <emission>6</emission>
+        <type>color</type>
+        <speed>32</speed>
+    </DEVICE>
     <JOB>
-        <jobNumber>56622</jobNumber>
-        <pageCount>10</pageCount>
-        <userName>NoahMasudi</userName>
-    </JOB>
-    <JOB>
-        <jobNumber>12354</jobNumber>
+        <jobNumber>89751</jobNumber>
         <pageCount>2</pageCount>
-        <userName>AdamBoustta</userName>
+        <type>color</type>
+        <userName>Isaac_Vandoorne</userName>
     </JOB>
     <JOB>
-        <jobNumber>23424</jobNumber>
-        <pageCount>9</pageCount>
-        <userName>Khabib</userName>
+        <jobNumber>2189</jobNumber>
+        <pageCount>3</pageCount>
+        <type>bw</type>
+        <userName>Isaac_Vandoorne</userName>
     </JOB>
 </SYSTEM>

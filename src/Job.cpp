@@ -57,6 +57,7 @@ Job::Job(TiXmlElement *job_element) {
     std::string JN_temp;
     std::string PC_temp;
     std::string UN_temp;
+    std::string TY_temp;
     Logger errorLog(errFile);
 
 
@@ -71,12 +72,12 @@ Job::Job(TiXmlElement *job_element) {
 
             if (nodeName == "jobNumber") {
                 JN_temp = nodeValue;
-
             } else if (nodeName == "pageCount") {
                 PC_temp = nodeValue;
-
             } else if (nodeName == "userName") {
                 UN_temp = nodeValue;
+            } else if (nodeName == "type") {
+                TY_temp = nodeValue;
             } else {
                 errorLog.logError("Onbekende element job: " + nodeName);
             }
@@ -96,7 +97,13 @@ try{EXPECT(!JN_temp.empty(), "Geen jobNumber opgegeven.");
 
 
     EXPECT(!UN_temp.empty(), "Geen userName opgegeven.");
-    userName = UN_temp;}
+    userName = UN_temp;
+    init_ = this;
+
+    EXPECT(TY_temp.empty(), "Geen type meegegeven");
+    EXPECT(!isDeviceTypeValid(TY_temp), "Moet een geldig type zijn");
+    type = stringToType(TY_temp);
+}
 catch (const std::runtime_error& error){
     errorLog.logError(error.what());
     }
@@ -107,10 +114,15 @@ std::string Job::EndMessage() const{
     Logger endMessage;
     return endMessage.logEndMessage(getBeingWorkedOnBy()->getName(), jobNumber, userName, pageCount);
 }
-
-
-
-
-
-
+Job::types Job::stringToType(std::string &typStr) {
+    if(typStr == "bw") {
+        return Job::types::bw;
+    }
+    else if(typStr == "scan"){
+        return Job::types::scan;
+    }
+    else {
+        return Job::types::color;
+    }
+}
 Job::~Job() {}

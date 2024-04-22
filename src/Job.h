@@ -14,19 +14,10 @@ using namespace std;
 
 class Device;
 
-
-
-
 class Job {
-private:
-    int jobNumber;
-    int pageCount;
-    string userName;
-    bool finished = false;
-    bool inProcess = false;
-    Device* beingWorkedOnBy = NULL;
 
 public:
+    enum types{bw, color, scan};
 
     /**
      * \Constructor met parameters
@@ -123,6 +114,17 @@ public:
      */
     void setBeingWorkedOnBy(Device *beingWorkedOnBy);
 
+    static Job::types stringToType(std::string &typStr);
+
+private:
+    int jobNumber;
+    int pageCount;
+    string userName;
+    bool finished = false;
+    bool inProcess = false;
+    Device* beingWorkedOnBy = NULL;
+    types type;
+    Job *init_;
 };
 
 #endif //PSE_PROJECT_JOB_H

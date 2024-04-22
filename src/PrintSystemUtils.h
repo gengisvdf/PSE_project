@@ -69,5 +69,6 @@ bool isNotInDevice(Job *job, const std::deque<Job*>& jobs);
 
 bool isNegative(int value);
 std::string constructFilename(const std::string& storageDirectory, const std::string& reportExtension, const std::string& name);
+bool isDeviceTypeValid(const std:: string& typeStr);
 
 #endif //PSE_PROJECT_PRINTSYSTEMUTILS_H

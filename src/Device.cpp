@@ -18,6 +18,7 @@ Device::Device(TiXmlElement *device_node) {
     string NA_temp;
     string EM_temp;
     string SP_temp;
+    string TY_temp;
     Logger errorLog(errFile);
 
     TiXmlNode *node = device_node->FirstChild();
@@ -37,7 +38,8 @@ Device::Device(TiXmlElement *device_node) {
             EM_temp = nodeValue;
         } else if (nodeName == "speed") {
             SP_temp = nodeValue;
-
+        } else if (nodeName == "type") {
+            TY_temp = nodeValue;
         } else {
             errorLog.logError("Onbekende element voor device: " + nodeName);
         }
@@ -46,23 +48,31 @@ Device::Device(TiXmlElement *device_node) {
     }
 
 
-    try{EXPECT(!NA_temp.empty(), "Geen name opgegeven.");
+    try {
+        EXPECT(!NA_temp.empty(), "Geen naam opgegeven.");
         name = NA_temp;
 
         EXPECT(!EM_temp.empty(), "Geen emission opgegeven.");
-        EXPECT(isInt(EM_temp) , "Emission moet een integer zijn.");
+        EXPECT(isInt(EM_temp), "Emission moet een integer zijn.");
         EXPECT(!isNegativeInt(EM_temp), "Emission mag niet negatief zijn");
         emission = stoi(EM_temp);
 
 
         EXPECT(!SP_temp.empty(), "Geen speed opgegeven.");
-        EXPECT(isInt(SP_temp) , "Speed moet een integer zijn.");
+        EXPECT(isInt(SP_temp), "Speed moet een integer zijn.");
         EXPECT(!isNegativeInt(SP_temp), "Speed mag niet negatief zijn");
-        speed = stoi(SP_temp);}
+        speed = stoi(SP_temp);
 
-    catch(const std::runtime_error& error){
+        EXPECT(!TY_temp.empty(), "Geen type opgegeven");
+        EXPECT(!isDeviceTypeValid(TY_temp), "Moet een geldig type zijn");
+        init_ = this;
+        type = stringToType(TY_temp);
+    }
+
+    catch (const std::runtime_error &error) {
         errorLog.logError(error.what());
     }
+
 }
 
 
@@ -151,6 +161,17 @@ string Device::processJob() {
 
 
     return job->EndMessage();
-}
 
+}
+Device::types Device::stringToType(std::string &typStr){
+    if (typStr == "bw") {
+        return Device::types::bw;
+    }
+    else if (typStr == "scan") {
+        return Device::types::scan;
+    }
+    else {
+        return Device::types::color;
+    }
+}
 

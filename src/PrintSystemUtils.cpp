@@ -142,3 +142,10 @@ std::string constructFilename(const std::string& storageDirectory, const std::st
     return filename;
 
 }
+bool isDeviceTypeValid(const string &typeStr){
+    if (typeStr == "bw" || typeStr == "color" || typeStr == "scan"){
+        return true;
+    } else {
+        return false;
+    }
+}

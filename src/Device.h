@@ -9,13 +9,9 @@ using namespace std;
 class Job;
 
 class Device {
-private:
-    string name;
-    int emission;
-    int speed;
-    std::deque<Job *> jobs;
 
 public:
+    enum types {bw, color, scan};
     // Constructoren
     Device(const string &name, int emission, int speed, const std::deque<Job *>  &jobs);
     explicit Device(TiXmlElement *device_node);
@@ -77,6 +73,16 @@ public:
      * Geeft de belasting van het apparaat terug als een integer.
      */
     int getJobBurden() const; // Geeft de belasting van het apparaat terug (aantal taken)
+
+    static Device::types stringToType(std::string &typStr);
+
+private:
+    Device *init_;
+    string name;
+    int emission;
+    int speed;
+    std::deque<Job *> jobs;
+    types type;
 };
 
 #endif //PSE_PROJECT_DEVICE_H
